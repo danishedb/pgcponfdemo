@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-example
+spec:
+  imagePullPolicy: Always
+  instances: 3
+  storage:
+    storageClass: standard
+    size: 1Gi

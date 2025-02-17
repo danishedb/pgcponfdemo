@@ -1,0 +1,56 @@
+multipass launch --name cnpg-demo --cpus 4 --mem 12g --disk 50g
+
+multipass exec cnpg-demo -- bash -c "curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -"
+
+K3S_IP=$(multipass info cnpg-demo | grep IPv4 | awk '{print $2}')
+
+echo $K3S_IP
+
+sed -i "s/127.0.0.1/${K3S_IP}/" ${HOME}/k3s.conf
+
+multipass exec cnpg-demo sudo cat /etc/rancher/k3s/k3s.yaml > ${HOME}/k3s.conf
+
+chmod 600 ${HOME}/k3s.conf
+
+
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.8.0/deploy/longhorn.yaml
+
+
+
+docker pull ghcr.io/cloudnative-pg/postgresql:17.2-32-bookworm
+
+
+CREATE TABLE demo(id int);
+
+insert into demo(id)values(13);
+insert into demo(id)values(14);
+
+select * from  region1 ;
+
+Pitr
+
+create cluster
+take backup
+create table
+CREATE TABLE demo(id int);
+insert into demo(id)values(13);
+ship wal
+checkpoint;
+take currenrt time stamp
+select TO_CHAR(CURRENT_TIMESTAMP,'YYYY-MM-DD HH24:MI:SS.US');
+insert into demo(id)values(14);
+take secind backup
+
+
+Topic:
+1. Talk about CNPG
+2. Talk about the project
+3. Create kind cluster
+4. Deploy the operator
+5. Deploy the cluster
+6. Take backup
+7. Restore backup
+8. Show the data
+9. deploy webtest and show failover
+10. Metrics
+

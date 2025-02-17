@@ -1,0 +1,16 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-example
+spec:
+  instances: 3
+  postgresql:
+    pg_hba:
+       - host all all 192.168.64.4 md5
+  storage:
+    storageClass: longhorn
+    size: 1Gi
+  walStorage:
+    size: 1Gi
+    storageClass: longhorn
+
