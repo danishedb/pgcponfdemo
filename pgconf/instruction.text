@@ -42,15 +42,20 @@ insert into demo(id)values(14);
 take secind backup
 
 
-Topic:
-1. Talk about CNPG
-2. Talk about the project
-3. Create kind cluster
-4. Deploy the operator
-5. Deploy the cluster
-6. Take backup
-7. Restore backup
-8. Show the data
-9. deploy webtest and show failover
-10. Metrics
+Metrics:
+```helm repo add prometheus-community \
+     https://prometheus-community.github.io/helm-charts
+
+   helm upgrade --install \
+     -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/kube-stack-config.yaml \
+     prometheus-community \
+     prometheus-community/kube-prometheus-stack
+     ```
+https://cloudnative-pg.io/documentation/1.25/quickstart/#part-4-monitor-clusters-with-prometheus-and-grafana
+
+Hibernation:
+kubectl annotate cluster cluster-example --overwrite cnpg.io/hibernation=on
+kubectl get cluster cluster-example -o "jsonpath={.status.conditions[?(.type==\"cnpg.io/hibernation\")]}"
+kubectl annotate cluster cluster-example --overwrite cnpg.io/hibernation=off
+
 
