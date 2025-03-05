@@ -40,7 +40,7 @@ spec:
   backup:
     target: primary
     barmanObjectStore:
-        destinationPath: s3://cnpgdok/
+        destinationPath: s3://cnpgpgconf/
         endpointURL: http://minio-service:9000
         s3Credentials:
           accessKeyId:

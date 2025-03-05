@@ -38,3 +38,11 @@ kubectl get cluster cluster-example -o "jsonpath={.status.conditions[?(.type==\"
 kubectl annotate cluster cluster-example --overwrite cnpg.io/hibernation=off
 
 
+// minio setup
+docker run \
+   --name minio \
+   -p 9001:9001 \
+	 -d \
+   quay.io/minio/minio:latest server /data --console-address ":9001"
+
+docker network connect kind minio
